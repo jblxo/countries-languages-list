@@ -2,6 +2,11 @@ import Head from 'next/head'
 import { useAllCountriesQuery } from '../src/generated/graphql';
 import { useRouter } from 'next/dist/client/router';
 import CountriesList from '../src/components/CountriesList';
+import styled from 'styled-components';
+
+const HomeStyles = styled.div`
+  background-color: ${props => props.theme.colors.primary};
+`;
 
 export default function Home() {
   const router = useRouter();
@@ -16,7 +21,7 @@ export default function Home() {
   const countriesCodes = data.countries.slice((pageNum - 1) * perPage, (pageNum - 1) * perPage + perPage).map((country) => country.code);
 
   return (
-    <div>
+    <HomeStyles>
       <Head>
         <title>Countries and Languages List</title>
       </Head>
@@ -24,6 +29,6 @@ export default function Home() {
       <div>
         <CountriesList codes={countriesCodes} />
       </div>
-    </div>
+    </HomeStyles>
   )
 }
