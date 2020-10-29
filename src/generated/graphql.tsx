@@ -130,6 +130,23 @@ export type AllCountriesQuery = (
   )> }
 );
 
+export type CountriesWithLanguagesQueryVariables = Exact<{
+  codes?: Maybe<Array<Maybe<Scalars['String']>>>;
+}>;
+
+
+export type CountriesWithLanguagesQuery = (
+  { __typename?: 'Query' }
+  & { countries: Array<(
+    { __typename?: 'Country' }
+    & Pick<Country, 'code' | 'name'>
+    & { languages: Array<(
+      { __typename?: 'Language' }
+      & Pick<Language, 'code' | 'name'>
+    )> }
+  )> }
+);
+
 
 export const AllCountriesDocument = gql`
     query allCountries {
@@ -164,3 +181,41 @@ export function useAllCountriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type AllCountriesQueryHookResult = ReturnType<typeof useAllCountriesQuery>;
 export type AllCountriesLazyQueryHookResult = ReturnType<typeof useAllCountriesLazyQuery>;
 export type AllCountriesQueryResult = Apollo.QueryResult<AllCountriesQuery, AllCountriesQueryVariables>;
+export const CountriesWithLanguagesDocument = gql`
+    query countriesWithLanguages($codes: [String]) {
+  countries(filter: {code: {in: $codes}}) {
+    code
+    name
+    languages {
+      code
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useCountriesWithLanguagesQuery__
+ *
+ * To run a query within a React component, call `useCountriesWithLanguagesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCountriesWithLanguagesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCountriesWithLanguagesQuery({
+ *   variables: {
+ *      codes: // value for 'codes'
+ *   },
+ * });
+ */
+export function useCountriesWithLanguagesQuery(baseOptions?: Apollo.QueryHookOptions<CountriesWithLanguagesQuery, CountriesWithLanguagesQueryVariables>) {
+        return Apollo.useQuery<CountriesWithLanguagesQuery, CountriesWithLanguagesQueryVariables>(CountriesWithLanguagesDocument, baseOptions);
+      }
+export function useCountriesWithLanguagesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CountriesWithLanguagesQuery, CountriesWithLanguagesQueryVariables>) {
+          return Apollo.useLazyQuery<CountriesWithLanguagesQuery, CountriesWithLanguagesQueryVariables>(CountriesWithLanguagesDocument, baseOptions);
+        }
+export type CountriesWithLanguagesQueryHookResult = ReturnType<typeof useCountriesWithLanguagesQuery>;
+export type CountriesWithLanguagesLazyQueryHookResult = ReturnType<typeof useCountriesWithLanguagesLazyQuery>;
+export type CountriesWithLanguagesQueryResult = Apollo.QueryResult<CountriesWithLanguagesQuery, CountriesWithLanguagesQueryVariables>;
