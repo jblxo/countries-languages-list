@@ -45,8 +45,8 @@ const CountryStyles = styled.div`
 interface Country {
   code: string;
   name: string;
-  capital: string;
-  currency: string;
+  capital?: string;
+  currency?: string;
   emoji: string;
   languages:
   {
