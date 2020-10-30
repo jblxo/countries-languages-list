@@ -15,6 +15,15 @@ const CountryStyles = styled.div`
     padding: 1.7rem 0.8rem;
   }
 
+  .info {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    padding: 1.3rem 0;
+    border-bottom: 1px solid black;
+  }
+
   .languages {
     padding: 2rem;
     display: grid;
@@ -36,21 +45,29 @@ const CountryStyles = styled.div`
 interface Country {
   code: string;
   name: string;
-  languages: 
-    {
-      code: string;
-      name?: string;
-    }[]
+  capital: string;
+  currency: string;
+  emoji: string;
+  languages:
+  {
+    code: string;
+    name?: string;
+  }[]
 }
 
 interface Props {
   country: Country
 }
 
-export default function CountryComp({country}: Props) {
+export default function CountryComp({ country }: Props) {
   return (
     <CountryStyles>
       <h3>{country.name}</h3>
+      <div className="info">
+        <div>Capital: {country.capital}</div>
+        <div>Currency: {country.currency}</div>
+        <div>Emoji: {country.emoji}</div>
+      </div>
       <div className="languages">
         {country.languages.map(lang => (
           <div key={country.code + lang.code}>{lang.name}</div>

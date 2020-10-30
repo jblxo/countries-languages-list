@@ -126,7 +126,7 @@ export type AllCountriesQuery = (
   { __typename?: 'Query' }
   & { countries: Array<(
     { __typename?: 'Country' }
-    & Pick<Country, 'code' | 'name'>
+    & Pick<Country, 'code'>
   )> }
 );
 
@@ -139,7 +139,7 @@ export type CountriesWithLanguagesQuery = (
   { __typename?: 'Query' }
   & { countries: Array<(
     { __typename?: 'Country' }
-    & Pick<Country, 'code' | 'name'>
+    & Pick<Country, 'code' | 'name' | 'capital' | 'currency' | 'emoji'>
     & { languages: Array<(
       { __typename?: 'Language' }
       & Pick<Language, 'code' | 'name'>
@@ -152,7 +152,6 @@ export const AllCountriesDocument = gql`
     query allCountries {
   countries {
     code
-    name
   }
 }
     `;
@@ -186,6 +185,10 @@ export const CountriesWithLanguagesDocument = gql`
   countries(filter: {code: {in: $codes}}) {
     code
     name
+    name
+    capital
+    currency
+    emoji
     languages {
       code
       name

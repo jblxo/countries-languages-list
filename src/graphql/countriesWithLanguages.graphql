@@ -2,6 +2,9 @@ query countriesWithLanguages($codes: [String]) {
   countries(filter: { code: { in: $codes } }) {
     code
     name
+    capital
+    currency
+    emoji
     languages {
       code
       name
