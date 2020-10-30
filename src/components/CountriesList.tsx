@@ -1,6 +1,15 @@
 import React from 'react';
 import { useCountriesWithLanguagesQuery } from '../generated/graphql';
 import Country from './Country';
+import styled from 'styled-components';
+
+const CountriesListStyles = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 6rem;
+  max-width: ${props => props.theme.maxWidth};
+  margin: 3rem auto;
+`;
 
 interface Props {
   codes: string[];
@@ -13,10 +22,10 @@ export default function CountriesList({ codes }: Props) {
   if(error) return <div>Whooops! Something went wrong! {error.message}</div>
 
   return (
-    <div>
+    <CountriesListStyles>
       {data.countries.map(country => (
-        <Country country={country} />
+        <Country key={country.code} country={country} />
       ))}
-    </div>
+    </CountriesListStyles>
   )
 }

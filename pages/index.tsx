@@ -5,7 +5,17 @@ import CountriesList from '../src/components/CountriesList';
 import Pagination from '../src/components/Pagination';
 import styled from 'styled-components';
 
-const HomeStyles = styled.div``;
+const HomeStyles = styled.div`
+  h1 {
+    text-align: center;
+    letter-spacing: 1.3rem;
+    text-transform: uppercase;
+  }
+
+  .pagination {
+    text-align: center;
+  }
+`;
 
 export default function Home() {
   const router = useRouter();
@@ -24,11 +34,11 @@ export default function Home() {
       <Head>
         <title>Countries and Languages List</title>
       </Head>
-      <h1>Hello World</h1>
-      <div>
+      <h1>Countries List!</h1>
+      <div className="countries">
         <CountriesList codes={countriesCodes} />
       </div>
-      <div>
+      <div className="pagination">
         <Pagination page={pageNum} perPage={perPage} count={data.countries.length} />
       </div>
     </HomeStyles>
