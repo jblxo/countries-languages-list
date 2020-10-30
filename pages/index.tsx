@@ -5,9 +5,7 @@ import CountriesList from '../src/components/CountriesList';
 import Pagination from '../src/components/Pagination';
 import styled from 'styled-components';
 
-const HomeStyles = styled.div`
-  background-color: ${props => props.theme.colors.primary};
-`;
+const HomeStyles = styled.div``;
 
 export default function Home() {
   const router = useRouter();
