@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useAllCountriesQuery } from '../src/generated/graphql';
 import { useRouter } from 'next/dist/client/router';
 import CountriesList from '../src/components/CountriesList';
+import Pagination from '../src/components/Pagination';
 import styled from 'styled-components';
 
 const HomeStyles = styled.div`
@@ -28,6 +29,9 @@ export default function Home() {
       <h1>Hello World</h1>
       <div>
         <CountriesList codes={countriesCodes} />
+      </div>
+      <div>
+        <Pagination page={pageNum} perPage={perPage} count={data.countries.length} />
       </div>
     </HomeStyles>
   )
